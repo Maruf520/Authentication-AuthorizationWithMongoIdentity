@@ -10,5 +10,6 @@ namespace IdentityMongo.Repositories.UserRepositories
     public interface IUserRepository
     {
         Task<string> CreateAsync(ApplicationUser applicationUser, string password);
+        Task<string> CreateAdminAsync(ApplicationUser applicationUser,string password, ApplicationRole applicationRole);
     }
 }

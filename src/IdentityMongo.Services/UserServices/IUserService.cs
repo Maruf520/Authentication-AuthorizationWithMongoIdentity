@@ -11,5 +11,6 @@ namespace IdentityMongo.Services.UserServices
     public interface IUserService
     {
         Task<ServiceResponse<UserDto>> CreateUserAsync(UserDto userDto);
+        Task<ServiceResponse<UserDto>> CreateAdmin(UserDto userDto);
     }
 }

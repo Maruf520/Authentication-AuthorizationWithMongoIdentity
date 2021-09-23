@@ -11,10 +11,20 @@ namespace IdentityMongo.Repositories.UserRepositories
     public class UserRepository : IUserRepository
     {
         private readonly UserManager<ApplicationUser> userManager;
-        public UserRepository(UserManager<ApplicationUser> userManager)
+        private readonly RoleManager<ApplicationRole> roleManager;
+        public UserRepository(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
             this.userManager = userManager;
+            this.roleManager = roleManager;
         }
+
+        public async Task<string> CreateAdminAsync(ApplicationUser applicationUser, string password, ApplicationRole applicationRole)
+        {
+            await userManager.CreateAsync(applicationUser, password);
+            await userManager.AddToRoleAsync(applicationUser, applicationRole.Name);
+            return "";
+        }
+
         public async Task<string> CreateAsync(ApplicationUser applicationUser, string password)
         {
             var userToCreate = await userManager.CreateAsync(applicationUser, password);

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IdentityMongo.Services.AuthServices;
 using IdentityMongo.Dtos.AuthDtos;
+using IdentityMongo.Dtos;
 
 namespace IdentityMongo.Api.Controllers
 {
@@ -43,5 +44,13 @@ namespace IdentityMongo.Api.Controllers
             var role = await authService.CreateRole(roleDto);
             return Ok(role);
         }
+
+        [HttpPost("register/admin")]
+        public async Task<IActionResult> RegisterAdmin(UserDto userDto)
+        {
+            var user = await userService.CreateAdmin(userDto);
+            return Ok(user);
+        }
+
     }
 }
